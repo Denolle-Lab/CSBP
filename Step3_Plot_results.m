@@ -23,14 +23,6 @@ ntwinAverage = 1; % number of time windows for averaging the power, must be odd 
 % if ntwinAverage = 1, do not average,
 % if ntwinAverage = 3, 5, 7, ..., perform averaging
 
-indexPlotwin = 0; % = 1: plot source imaging results of each time window and make the movie; otherwise: do not plot
-Index_Snapshot = 0;%indexPlotwin; % =1 plot snapshot
-T_snapshot=10:10:120;
-
-Index_syn=0; % for resolution test, plot the synthetic sources
-
-
-
 PlotFile=cd;
 
 IndexSettingRange =1; % =1 set ploting range; =0 not
@@ -86,10 +78,6 @@ travtbl = load([FigFolder 'DiffTravtbl.mat']); % differential travel time table 
 %%
 load(datafile); % load data
 
-if Index_syn==1
-    src_time_correct=8; % correction for the synthetic source time
-end
-
 NgridsX=length(xrange);
 NgridsY=length(yrange);
 
@@ -119,18 +107,6 @@ end
 nsegwin = floor((ptmax - ptmin - segwint)/dtsegwin) + 1; % number of window segment for imaging
 [temp, IIf] = min(abs(ffeff - ftest)); % find index of the closest freq to ftest
 ftestnew = ffeff(IIf); % closest freq to ftest
-
-% create folder to save CS and beamforming images of each time step
-if indexPlotwin == 1
-    load('waveform.mat') ;
-    if indexSumAllFreq == 0
-        CVXBeamFigfolder = [FigFolder 'CVXBeamFig_' num2str(ftestnew,3) 'Hz/'];
-        mkdir(CVXBeamFigfolder);
-    else
-        CVXBeamFigfolder = [FigFolder 'CVXBeamFig_' num2str(sumfreqrange(1)) '-' num2str(sumfreqrange(2)) 'Hz/'];
-        mkdir(CVXBeamFigfolder);
-    end
-end
 
 %% read plate boundary data
 fbdr = fopen('plate_boundaries', 'r');
