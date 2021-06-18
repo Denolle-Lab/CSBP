@@ -1,0 +1,36 @@
+* **************************************************
+* NETWORK     : CI
+* STATION     : GLA
+* LOCATION    : 
+* CHANNEL     : BHZ
+* CREATED     : 2021-02-22T20:38:27.288434Z
+* START       : 2010-01-14T19:00:00.000000Z
+* END         : 2012-10-04T19:00:00.000000Z
+* DESCRIPTION : Glamis
+* LATITUDE    : 33.05149
+* LONGITUDE   : -114.82706
+* ELEVATION   : 610.0
+* DEPTH       : 0.0
+* DIP (SEED)  : -90.0
+* AZIMUTH     : 0.0
+* SAMPLE RATE : 40.0
+* INPUT UNIT  : M
+* OUTPUT UNIT : COUNTS
+* INSTTYPE    : None
+* INSTGAIN    : 2578.28 (M/S)
+* SENSITIVITY : 4325640000.0 (M/S)
+* A0          : 3947.98
+* **************************************************
+ZEROS 3
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+POLES 4
+ -1.234120e-02 +1.234150e-02
+ -1.234120e-02 -1.234150e-02
+ -3.917570e+01 +4.912340e+01
+ -3.917570e+01 -4.912340e+01
+CONSTANT 1.707754e+13
+
+
+

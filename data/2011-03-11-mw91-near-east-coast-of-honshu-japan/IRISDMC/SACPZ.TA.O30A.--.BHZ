@@ -1,0 +1,44 @@
+* **********************************
+* NETWORK   (KNETWK): TA
+* STATION    (KSTNM): O30A
+* LOCATION   (KHOLE): 
+* CHANNEL   (KCMPNM): BHZ
+* CREATED           : 2021-02-22T20:37:18
+* START             : 2009-05-29T00:00:00
+* END               : 2011-04-04T15:40:00
+* DESCRIPTION       : M W Ranch, Wilsonville, NE, USA
+* LATITUDE          : 40.179100
+* LONGITUDE         : -100.057098
+* ELEVATION         : 751.0
+* DEPTH             : 0.0
+* DIP               : 0.0
+* AZIMUTH           : 0.0
+* SAMPLE RATE       : 40.0
+* INPUT UNIT        : M
+* OUTPUT UNIT       : COUNTS
+* INSTTYPE          : Nanometrics Trillium 240 Sec Response sn 0-399/Qua
+* INSTGAIN          : 1.197050e+03 (M/S)
+* COMMENT           : 
+* SENSITIVITY       : 5.020780e+08 (M/S)
+* A0                : 4.543170e+05
+* **********************************
+ZEROS	6
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	-9.000000e+01	+0.000000e+00	
+	-1.642000e+02	+0.000000e+00	
+	-3.203000e+03	+0.000000e+00	
+POLES	7
+	-1.813000e-02	+1.803000e-02	
+	-1.813000e-02	-1.803000e-02	
+	-1.249000e+02	+0.000000e+00	
+	-1.975000e+02	+2.561000e+02	
+	-1.975000e+02	-2.561000e+02	
+	-5.690000e+02	+1.150000e+03	
+	-5.690000e+02	-1.150000e+03	
+CONSTANT	2.281026e+14
+
+
+
+

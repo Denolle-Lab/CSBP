@@ -1,0 +1,40 @@
+* **********************************
+* NETWORK   (KNETWK): US
+* STATION    (KSTNM): ECSD
+* LOCATION   (KHOLE): 
+* CHANNEL   (KCMPNM): BHZ
+* CREATED           : 2021-02-22T20:37:27
+* START             : 2006-05-17T17:00:00
+* END               : 2011-05-02T21:02:40
+* DESCRIPTION       : EROS Data Center, Sioux Falls, South Dakota, USA
+* LATITUDE          : 43.733700
+* LONGITUDE         : -96.614100
+* ELEVATION         : 432.9
+* DEPTH             : 45.1
+* DIP               : 0.0
+* AZIMUTH           : 0.0
+* SAMPLE RATE       : 40.0
+* INPUT UNIT        : M
+* OUTPUT UNIT       : COUNTS
+* INSTTYPE          : CMG3TB=T3P11=Q330SR=1268
+* INSTGAIN          : 1.996800e+04 (M/S)
+* COMMENT           : 
+* SENSITIVITY       : 8.375180e+09 (M/S)
+* A0                : 4.322980e+10
+* **********************************
+ZEROS	3
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+POLES	6
+	-3.700800e-02	-3.700800e-02	
+	-3.700800e-02	+3.700800e-02	
+	-1.888280e+02	-1.955400e+02	
+	-1.888280e+02	+1.955400e+02	
+	-2.592220e+02	-7.196450e+02	
+	-2.592220e+02	+7.196450e+02	
+CONSTANT	3.620574e+20
+
+
+
+

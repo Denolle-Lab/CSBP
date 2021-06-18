@@ -1,0 +1,42 @@
+* **********************************
+* NETWORK   (KNETWK): IU
+* STATION    (KSTNM): TUC
+* LOCATION   (KHOLE): 00
+* CHANNEL   (KCMPNM): BHZ
+* CREATED           : 2021-02-22T20:37:03
+* START             : 2010-12-20T22:31:00
+* END               : 2011-06-29T00:00:00
+* DESCRIPTION       : Tucson, Arizona
+* LATITUDE          : 32.309800
+* LONGITUDE         : -110.784700
+* ELEVATION         : 909.0
+* DEPTH             : 1.0
+* DIP               : 0.0
+* AZIMUTH           : 0.0
+* SAMPLE RATE       : 20.0
+* INPUT UNIT        : M
+* OUTPUT UNIT       : COUNTS
+* INSTTYPE          : Streckeisen STS-1H/VBB Seismometer
+* INSTGAIN          : 2.198730e+03 (M/S)
+* COMMENT           : 
+* SENSITIVITY       : 3.689110e+09 (M/S)
+* A0                : 3.950870e+03
+* **********************************
+ZEROS	5
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	-3.757830e-02	+0.000000e+00	
+	-3.757830e-02	+0.000000e+00	
+POLES	6
+	-1.622590e-02	+0.000000e+00	
+	-1.672840e-02	-1.234000e-02	
+	-1.672840e-02	+1.234000e-02	
+	-4.966920e-02	+0.000000e+00	
+	-3.918000e+01	-4.912000e+01	
+	-3.918000e+01	+4.912000e+01	
+CONSTANT	1.457519e+13
+
+
+
+

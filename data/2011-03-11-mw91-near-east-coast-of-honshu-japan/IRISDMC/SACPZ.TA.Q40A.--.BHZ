@@ -1,0 +1,39 @@
+* **********************************
+* NETWORK   (KNETWK): TA
+* STATION    (KSTNM): Q40A
+* LOCATION   (KHOLE): 
+* CHANNEL   (KCMPNM): BHZ
+* CREATED           : 2021-02-22T20:37:21
+* START             : 2010-12-06T00:00:00
+* END               : 2012-09-13T00:15:00
+* DESCRIPTION       : Laux Farm, Auxvasse, MO, USA
+* LATITUDE          : 38.994598
+* LONGITUDE         : -92.074799
+* ELEVATION         : 275.0
+* DEPTH             : 0.0
+* DIP               : 0.0
+* AZIMUTH           : 0.0
+* SAMPLE RATE       : 40.0
+* INPUT UNIT        : M
+* OUTPUT UNIT       : COUNTS
+* INSTTYPE          : Guralp CMG3T/Quanterra 330 Linear Phase Composite
+* INSTGAIN          : 1.504200e+03 (M/S)
+* COMMENT           : 
+* SENSITIVITY       : 6.309070e+08 (M/S)
+* A0                : 5.714000e+08
+* **********************************
+ZEROS	3
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+POLES	5
+	-3.701000e-02	+3.701000e-02	
+	-3.701000e-02	-3.701000e-02	
+	-1.131000e+03	+0.000000e+00	
+	-1.005000e+03	+0.000000e+00	
+	-5.027000e+02	+0.000000e+00	
+CONSTANT	3.605003e+17
+
+
+
+

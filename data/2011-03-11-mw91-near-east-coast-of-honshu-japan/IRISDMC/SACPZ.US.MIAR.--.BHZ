@@ -1,0 +1,39 @@
+* **********************************
+* NETWORK   (KNETWK): US
+* STATION    (KSTNM): MIAR
+* LOCATION   (KHOLE): 
+* CHANNEL   (KCMPNM): BHZ
+* CREATED           : 2021-02-22T20:37:28
+* START             : 2005-02-04T18:27:00
+* END               : 2011-05-02T22:15:00
+* DESCRIPTION       : Mount Ida, Arkansas, USA
+* LATITUDE          : 34.545400
+* LONGITUDE         : -93.576500
+* ELEVATION         : 207.0
+* DEPTH             : 0.0
+* DIP               : 0.0
+* AZIMUTH           : 0.0
+* SAMPLE RATE       : 40.0
+* INPUT UNIT        : M
+* OUTPUT UNIT       : COUNTS
+* INSTTYPE          : STS2-I=80412=Q330SR=0837
+* INSTGAIN          : 1.500000e+03 (M/S)
+* COMMENT           : 
+* SENSITIVITY       : 6.291450e+08 (M/S)
+* A0                : 4.853940e+07
+* **********************************
+ZEROS	3
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+POLES	5
+	-3.702370e-02	-3.702440e-02	
+	-3.702370e-02	+3.702440e-02	
+	-2.513270e+02	+0.000000e+00	
+	-1.186340e+02	-4.230650e+02	
+	-1.186340e+02	+4.230650e+02	
+CONSTANT	3.053832e+16
+
+
+
+

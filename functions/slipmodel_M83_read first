@@ -1,0 +1,12 @@
+To be easy to load in matlab , this is format. ;-D by Weize Qin
+
+#Total number of fault_segments=     2
+#Fault_segment =   1 nx(Along-strike)=  25 Dx=  7.50km ny(downdip)=  15 Dy=  7.50km
+#Boundary of Fault_segment     1
+#Lon.  Lat.  Depth
+      154.30400       55.39480      607.95300
+      154.45599       53.72660      607.95300
+      152.75400       53.67530      627.16302
+      152.60201       55.34350      627.16302
+      154.30400       55.39480      607.95300
+#Lon. Lat. depth slip rake strike dip rise_time rupture_time

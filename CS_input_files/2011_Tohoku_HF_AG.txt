@@ -1,0 +1,82 @@
+./Tohoku_HF_AG       NaN             "% set data and results path where the data file is" 
+    
+Tohoku_event_data     NaN         "% data file name"
+/ResultsFile/         NaN           "% FigFolder setting"
+tt91.P        NaN             "% TravelTimeFile"
+[0.6]            NaN     "% estdatamisftRatio ---estimated misfit ratio: the damping factor for the inversion"
+
+
+qlat            38.30        "% source latitude USGS epicenter"
+qlon            142.50         "% source longitude"
+qdep            19.7            "% source depth"
+strike          4             "% strike of the fault, from USGS WPhase solution"
+
+
+dxloc           6              "% x-axis points interval (size of small grid)"
+dyloc           4              "% y-axis points interval (size of small grid)"
+
+Ngrid_X         9               "% initial coarse grids number in X"
+Ngrid_Y         10               "% initial coarse grids number in Y"
+
+ddx2            8               "% small grid # between coarse grid point, need to be 2^N"
+ddy2            8               "% small grid # between coarse grid point, need to be 2^N"
+
+
+thopyshift      2               "% shift time of the first P wave at the hypocenter (this is a correction!!!)"
+ptmin           -10             "% min time (s) for backprojection, with respect to the first arrival"
+ptmax           180.05              "% max time (s) for backprojection, with respect to the first arrival"
+segwint         8               "% segment window length, starting from ptmin: [ptmin ptmin+segwint]"
+dtsegwin        2               "% increment time of segment window: [ptmin+dtsegwin ptmin+dtsegwin+segwint]"
+
+twinhypo_LB     0           "% start time for selecting the first hypocenter subevent" 
+twinhypo_UB     8           "% end time for selecting the first hypocenter subevent" 
+
+xcorwint        14               "% time window length (s) for cross-correlation centered at selected time corresponding to the maximum amplitude of picked src locations"
+
+
+freqband_LB        0.5         "% frequency band (Hz) for band-pass filtering the traces"
+freqband_UB        4            "% frequency band (Hz) for band-pass filtering the traces"
+
+freqbandcvx_LB     0.5       "% frequency band (Hz) for CVX and beamforming"
+freqbandcvx_UB     1       "% frequency band (Hz) for CVX and beamforming"
+
+maxshifttime	0.8             "% max shift time for subevents cross-correlation" 
+minSNR          10              "% SNR is defined as max(trace_envelope(0:ptmax)/mean(trace_envelope(t1:0) (t1, starting time of the trace, must < 0)"
+
+
+												
+minrr           0.7             "% min cross-correlation coefficient for stacking, only stations with higer CC will be kept"
+
+
+staweightdist	5               "% station distance for amplitude weighting of the stack"
+
+azirange_LB        0		"% lower bound azimuth for station selection "
+azirange_UB        360		"% lower bound azimuth for station selection "	
+
+distrange_LB       0		"% lower bound epicentral distance for station selection "
+distrange_UB       360		"% lower bound epicentral distance for station selection "
+
+lonrange_LB        -130		"% lower bound longitude for station selection "
+lonrange_UB        -60		"% lower bound longitude for station selection "
+
+latrange_LB        20		"% lower bound latitude for station selection "
+latrange_UB        50		"% lower bound latitude for station selection "
+
+
+faultxpt_LB        -400         "% x-coordinates lower bound of fault line"
+faultxpt_UB        400          "% x-coordinates upper bound of fault line"
+faultxpt_dif       2            "% x-coordinates difference of fault line"
+
+
+IndexpospolOnly     1           "% =1, the whole processing and stacking processing only use positive polarity data; =0 both positive and negative"
+IndexRandStation	0           "% =1,only use randomly selected stations;=0,use all good stations"
+randPercent         0.5         "% if IndexRandStation=1, the percentage of random station chosen to use"
+
+IndexDimenRedu      0           "% =1, multiply a random matrix to reduce the dimensionality (i.e. accelerate the computation);=0 not"
+DRpercentage        0.5         "% percentage of dimensionality reduction" 
+
+Lnorm               1           "% Choosing L-norm : =1 minimize L1[(Ax-b)+damp*L1(x)];  =2 minimize L2[(Ax-b)+damp*L1(x)]"
+
+IndexWavelet        0           "% =1,Using wavelet transform; =0, do not use wavelet
+
+

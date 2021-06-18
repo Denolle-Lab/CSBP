@@ -1,0 +1,36 @@
+* **************************************************
+* NETWORK     : CI
+* STATION     : SNCC
+* LOCATION    : 
+* CHANNEL     : BHZ
+* CREATED     : 2021-02-22T20:39:12.623457Z
+* START       : 2010-04-26T00:00:00.000000Z
+* END         : 2012-07-31T18:00:00.000000Z
+* DESCRIPTION : San Nicolas Island
+* LATITUDE    : 33.24787
+* LONGITUDE   : -119.52437
+* ELEVATION   : 275.0
+* DEPTH       : 0.0
+* DIP (SEED)  : -90.0
+* AZIMUTH     : 0.0
+* SAMPLE RATE : 40.0
+* INPUT UNIT  : M
+* OUTPUT UNIT : COUNTS
+* INSTTYPE    : None
+* INSTGAIN    : 2562.32 (M/S)
+* SENSITIVITY : 4298860000.0 (M/S)
+* A0          : 3947.98
+* **************************************************
+ZEROS 3
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+POLES 4
+ -1.234120e-02 +1.234150e-02
+ -1.234120e-02 -1.234150e-02
+ -3.917570e+01 +4.912340e+01
+ -3.917570e+01 -4.912340e+01
+CONSTANT 1.697181e+13
+
+
+

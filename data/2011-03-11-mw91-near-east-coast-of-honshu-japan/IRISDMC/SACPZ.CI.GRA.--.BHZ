@@ -1,0 +1,37 @@
+* **************************************************
+* NETWORK     : CI
+* STATION     : GRA
+* LOCATION    : 
+* CHANNEL     : BHZ
+* CREATED     : 2021-02-22T20:38:27.293323Z
+* START       : 2010-07-08T19:00:00.000000Z
+* END         : 2016-05-17T20:00:00.000000Z
+* DESCRIPTION : Grapevine Ranger Station
+* LATITUDE    : 36.99608
+* LONGITUDE   : -117.36621
+* ELEVATION   : 689.0
+* DEPTH       : 0.0
+* DIP (SEED)  : -90.0
+* AZIMUTH     : 0.0
+* SAMPLE RATE : 40.0
+* INPUT UNIT  : M
+* OUTPUT UNIT : COUNTS
+* INSTTYPE    : None
+* INSTGAIN    : 1495.76 (M/S)
+* SENSITIVITY : 627368000.0 (M/S)
+* A0          : 48762300.0
+* **************************************************
+ZEROS 3
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+POLES 5
+ -3.702370e-02 +3.702440e-02
+ -3.702370e-02 -3.702440e-02
+ -1.187520e+02 +4.234880e+02
+ -1.187520e+02 -4.234880e+02
+ -2.513270e+02 +0.000000e+00
+CONSTANT 3.059191e+16
+
+
+

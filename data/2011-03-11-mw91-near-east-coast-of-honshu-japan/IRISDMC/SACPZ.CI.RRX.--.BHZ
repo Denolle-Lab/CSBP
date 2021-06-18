@@ -1,0 +1,37 @@
+* **************************************************
+* NETWORK     : CI
+* STATION     : RRX
+* LOCATION    : 
+* CHANNEL     : BHZ
+* CREATED     : 2021-02-22T20:39:12.607576Z
+* START       : 2010-12-03T00:00:00.000000Z
+* END         : 2013-10-01T16:30:00.000000Z
+* DESCRIPTION : Barstow Service Center
+* LATITUDE    : 34.87533
+* LONGITUDE   : -116.99684
+* ELEVATION   : 676.2
+* DEPTH       : 0.0
+* DIP (SEED)  : -90.0
+* AZIMUTH     : 0.0
+* SAMPLE RATE : 40.0
+* INPUT UNIT  : M
+* OUTPUT UNIT : COUNTS
+* INSTTYPE    : None
+* INSTGAIN    : 1493.74 (M/S)
+* SENSITIVITY : 626520000.0 (M/S)
+* A0          : 573035000.0
+* **************************************************
+ZEROS 3
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+POLES 5
+ -1.131000e+03 +0.000000e+00
+ -1.005000e+03 +0.000000e+00
+ -5.026500e+02 +0.000000e+00
+ -3.700800e-02 -3.700800e-02
+ -3.700800e-02 +3.700800e-02
+CONSTANT 3.590179e+17
+
+
+

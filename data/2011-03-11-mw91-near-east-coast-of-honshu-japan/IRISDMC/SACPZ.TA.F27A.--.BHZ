@@ -1,0 +1,44 @@
+* **********************************
+* NETWORK   (KNETWK): TA
+* STATION    (KSTNM): F27A
+* LOCATION   (KHOLE): 
+* CHANNEL   (KCMPNM): BHZ
+* CREATED           : 2021-02-22T20:37:11
+* START             : 2009-07-19T00:00:00
+* END               : 2011-05-06T16:50:00
+* DESCRIPTION       : Lemmon, SD, USA
+* LATITUDE          : 45.872700
+* LONGITUDE         : -102.020302
+* ELEVATION         : 757.0
+* DEPTH             : 0.0
+* DIP               : 0.0
+* AZIMUTH           : 0.0
+* SAMPLE RATE       : 40.0
+* INPUT UNIT        : M
+* OUTPUT UNIT       : COUNTS
+* INSTTYPE          : Nanometrics Trillium 240 Sec Response sn 400 and a
+* INSTGAIN          : 1.197020e+03 (M/S)
+* COMMENT           : 
+* SENSITIVITY       : 5.020650e+08 (M/S)
+* A0                : 4.528260e+05
+* **********************************
+ZEROS	6
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	-9.166000e+01	+0.000000e+00	
+	-1.601000e+02	+0.000000e+00	
+	-3.207000e+03	+0.000000e+00	
+POLES	7
+	-1.770000e-02	+1.760000e-02	
+	-1.770000e-02	-1.760000e-02	
+	-1.267000e+02	+0.000000e+00	
+	-1.920000e+02	+2.591000e+02	
+	-1.920000e+02	-2.591000e+02	
+	-5.577000e+02	+1.143000e+03	
+	-5.577000e+02	-1.143000e+03	
+CONSTANT	2.273481e+14
+
+
+
+

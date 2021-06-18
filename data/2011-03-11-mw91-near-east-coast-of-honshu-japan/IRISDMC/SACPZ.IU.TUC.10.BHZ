@@ -1,0 +1,39 @@
+* **********************************
+* NETWORK   (KNETWK): IU
+* STATION    (KSTNM): TUC
+* LOCATION   (KHOLE): 10
+* CHANNEL   (KCMPNM): BHZ
+* CREATED           : 2021-02-22T20:37:03
+* START             : 2010-12-21T10:13:00
+* END               : 2014-11-19T00:00:00
+* DESCRIPTION       : Tucson, Arizona
+* LATITUDE          : 32.309800
+* LONGITUDE         : -110.784700
+* ELEVATION         : 909.0
+* DEPTH             : 1.0
+* DIP               : 0.0
+* AZIMUTH           : 0.0
+* SAMPLE RATE       : 40.0
+* INPUT UNIT        : M
+* OUTPUT UNIT       : COUNTS
+* INSTTYPE          : Guralp CMG3-T Seismometer
+* INSTGAIN          : 1.968230e+04 (M/S)
+* COMMENT           : 
+* SENSITIVITY       : 3.302150e+10 (M/S)
+* A0                : 7.208210e+07
+* **********************************
+ZEROS	3
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+	+0.000000e+00	+0.000000e+00	
+POLES	5
+	-3.660540e-02	-3.771100e-02	
+	-3.660540e-02	+3.771100e-02	
+	-1.979000e+02	-1.979000e+02	
+	-1.979000e+02	+1.979000e+02	
+	-9.111000e+02	+0.000000e+00	
+CONSTANT	2.380259e+18
+
+
+
+

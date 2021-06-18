@@ -1,0 +1,37 @@
+* **************************************************
+* NETWORK     : CI
+* STATION     : CIA
+* LOCATION    : 
+* CHANNEL     : BHZ
+* CREATED     : 2021-02-22T20:38:27.272657Z
+* START       : 2004-04-12T04:31:00.000000Z
+* END         : 2011-06-22T00:00:00.000000Z
+* DESCRIPTION : Catalina Island Airport
+* LATITUDE    : 33.401898
+* LONGITUDE   : -118.415021
+* ELEVATION   : 477.0
+* DEPTH       : 0.0
+* DIP (SEED)  : -90.0
+* AZIMUTH     : 0.0
+* SAMPLE RATE : 40.0
+* INPUT UNIT  : M
+* OUTPUT UNIT : COUNTS
+* INSTTYPE    : None
+* INSTGAIN    : 1499.91 (M/S)
+* SENSITIVITY : 601107000.0 (M/S)
+* A0          : 48627500.0
+* **************************************************
+ZEROS 3
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+ +0.000000e+00 +0.000000e+00
+POLES 5
+ -3.702370e-02 +3.702440e-02
+ -3.702370e-02 -3.702440e-02
+ -1.187520e+02 +4.234880e+02
+ -1.187520e+02 -4.234880e+02
+ -2.513270e+02 +0.000000e+00
+CONSTANT 2.923033e+16
+
+
+
