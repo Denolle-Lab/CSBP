@@ -1,63 +1,66 @@
-/home/ustc/Mfiles/YiJiuxun/2013Okhotsk_EU       NaN             "% set data and results path where the data file is" 
+./Tohoku_HF_AG       NaN             "% set data and results path where the data file is" 
     
-2013_Okhotsk_EU     NaN         "% data file name"
+Tohoku_event_data     NaN         "% data file name"
 /ResultsFile/         NaN           "% FigFolder setting"
 tt91.P        NaN             "% TravelTimeFile"
-[0.1,0.2,0.3,0.4,0.5,0.6,0.7]            NaN     "% estdatamisftRatio ---estimated misfit ratio: the damping factor for the inversion"
+[0.6]            NaN     "% estdatamisftRatio ---estimated misfit ratio: the damping factor for the inversion"
 
 
-qlat            54.874         "% source latitude USGS epicenter"
-qlon            153.281         "% source longitude"
-qdep            608.9            "% source depth"
-strike          12             "% strike of the fault, from USGS WPhase solution"
+qlat            38.30        "% source latitude USGS epicenter"
+qlon            142.50         "% source longitude"
+qdep            19.7            "% source depth"
+strike          4             "% strike of the fault, from USGS WPhase solution"
 
 
-xlocmin         -200            "% x-axis starting distance with respect to (qlon, qlat)"
-xlocmax         200             "% x-axis ending distance with respect to (qlon, qlat)"
-dxloc           8              "% x-axis points interval"
-ylocmin         -200            "% y-axis starting distance"
-ylocmax         200             "% y-axis starting distance"
-dyloc           8              "% y-axis points interval"
+dxloc           6              "% x-axis points interval (size of small grid)"
+dyloc           4              "% y-axis points interval (size of small grid)"
 
-thopyshift      0               "% shift time of the first P wave at the hypocenter (this is a correction!!!)"
+Ngrid_X         9               "% initial coarse grids number in X"
+Ngrid_Y         10               "% initial coarse grids number in Y"
+
+ddx2            8               "% small grid # between coarse grid point, need to be 2^N"
+ddy2            8               "% small grid # between coarse grid point, need to be 2^N"
+
+
+thopyshift      2               "% shift time of the first P wave at the hypocenter (this is a correction!!!)"
 ptmin           -10             "% min time (s) for backprojection, with respect to the first arrival"
-ptmax           42              "% max time (s) for backprojection, with respect to the first arrival"
-segwint         6               "% segment window length, starting from ptmin: [ptmin ptmin+segwint]"
+ptmax           180.05              "% max time (s) for backprojection, with respect to the first arrival"
+segwint         8               "% segment window length, starting from ptmin: [ptmin ptmin+segwint]"
 dtsegwin        2               "% increment time of segment window: [ptmin+dtsegwin ptmin+dtsegwin+segwint]"
 
 twinhypo_LB     0           "% start time for selecting the first hypocenter subevent" 
-twinhypo_UB     5           "% end time for selecting the first hypocenter subevent" 
+twinhypo_UB     8           "% end time for selecting the first hypocenter subevent" 
 
-xcorwint        2               "% time window length (s) for cross-correlation centered at selected time corresponding to the maximum amplitude of picked src locations"
+xcorwint        14               "% time window length (s) for cross-correlation centered at selected time corresponding to the maximum amplitude of picked src locations"
 
 
-freqband_LB        0.05         "% frequency band (Hz) for band-pass filtering the traces"
+freqband_LB        0.5         "% frequency band (Hz) for band-pass filtering the traces"
 freqband_UB        4            "% frequency band (Hz) for band-pass filtering the traces"
 
-freqbandcvx_LB     0.05       "% frequency band (Hz) for CVX and beamforming"
+freqbandcvx_LB     0.5       "% frequency band (Hz) for CVX and beamforming"
 freqbandcvx_UB     1       "% frequency band (Hz) for CVX and beamforming"
 
-maxshifttime	1             "% max shift time for subevents cross-correlation" 
+maxshifttime	0.8             "% max shift time for subevents cross-correlation" 
 minSNR          10              "% SNR is defined as max(trace_envelope(0:ptmax)/mean(trace_envelope(t1:0) (t1, starting time of the trace, must < 0)"
 
 
 												
-minrr           0.75             "% min cross-correlation coefficient for stacking"
+minrr           0.7             "% min cross-correlation coefficient for stacking, only stations with higer CC will be kept"
 
 
 staweightdist	5               "% station distance for amplitude weighting of the stack"
 
-azirange_LB        0	
-azirange_UB        360	
+azirange_LB        0		"% lower bound azimuth for station selection "
+azirange_UB        360		"% lower bound azimuth for station selection "	
 
-distrange_LB       0	
-distrange_UB       360	
+distrange_LB       0		"% lower bound epicentral distance for station selection "
+distrange_UB       360		"% lower bound epicentral distance for station selection "
 
-lonrange_LB        -180	
-lonrange_UB        180
+lonrange_LB        -130		"% lower bound longitude for station selection "
+lonrange_UB        -60		"% lower bound longitude for station selection "
 
-latrange_LB        -90
-latrange_UB        90	
+latrange_LB        20		"% lower bound latitude for station selection "
+latrange_UB        50		"% lower bound latitude for station selection "
 
 
 faultxpt_LB        -400         "% x-coordinates lower bound of fault line"
@@ -74,4 +77,6 @@ DRpercentage        0.5         "% percentage of dimensionality reduction"
 
 Lnorm               1           "% Choosing L-norm : =1 minimize L1[(Ax-b)+damp*L1(x)];  =2 minimize L2[(Ax-b)+damp*L1(x)]"
 
-IndexWavelet        1           "% =1,Using wavelet transform; =0, do not use wavelet
+IndexWavelet        0           "% =1,Using wavelet transform; =0, do not use wavelet
+
+
