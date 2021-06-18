@@ -2,49 +2,16 @@
 
 clear all;
 close all;
-% 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% JUST FOR CONVENIENCE!!!
-% ftest=0.05;
-% while (ftest<=1)
-%     close all
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% JUST FOR CONVENIENCE!!!
 
 %% input output data mat file
 DataPath='./Tohoku_HF_AG';
 
 PlotTxt='Plotfile_in';
 
-IndexTopoBackground =0; % =0 not using Topography background; =1 use topography background
-% be careful, a topography data file must exist in
-% the data result file
 
 IndexSettingEnd =1 ; % =1 set ending time ; =0 not
 beginTime = 0;
 endingTime = 180;
-
-
-PlotFile=cd;
-
-IndexSettingRange =1; % =1 set ploting range; =0 not
-Xrange=[140 145];
-Yrange=[37 40];
-
-
-
-
-
-%% set input parameters
-% set strike
-strike = 50; % strike of the fault, from USGS WPhase solution
-strikevector = [cosd(90-strike);sind(90-strike)];
-if strike==0||strike==180
-    faultypt = -400:2:400;
-    faultxpt = zeros(1,length(faultypt));
-else
-    faultxpt = -400:2:400; % x-coordinates of fault line
-    faultypt = faultxpt*tand(90-strike); % y-coordinates of fault line
-end
-
 
 % single frequencies to be studies: ftest = [1 0.75 0.5 0.4 0.3 0.2 0.15 0.1 0.075]
 ftest = 0.05;  % test freq for plotting, effective only when indexSumAllFreq = 0;
@@ -61,6 +28,28 @@ Index_Snapshot = 0;%indexPlotwin; % =1 plot snapshot
 T_snapshot=10:10:120;
 
 Index_syn=0; % for resolution test, plot the synthetic sources
+
+
+
+PlotFile=cd;
+
+IndexSettingRange =1; % =1 set ploting range; =0 not
+Xrange=[140 145];
+Yrange=[37 40];
+
+
+
+%% set input parameters
+% set strike
+strike = 50; % strike of the fault, from USGS WPhase solution
+strikevector = [cosd(90-strike);sind(90-strike)];
+if strike==0||strike==180
+    faultypt = -400:2:400;
+    faultxpt = zeros(1,length(faultypt));
+else
+    faultxpt = -400:2:400; % x-coordinates of fault line
+    faultypt = faultxpt*tand(90-strike); % y-coordinates of fault line
+end
 
 
 %% input parameters END
@@ -85,11 +74,6 @@ copyfile('plate_boundaries',DataPath);
 %% change to the data path
 
 cd(DataPath);
-
-if IndexTopoBackground == 1
-    load(ETOPOmat);
-end
-
 
 [FilePath]=textread(PlotTxt,'%s',-1);
 CSresultdir_temp = cell2mat(FilePath(1));
@@ -569,18 +553,6 @@ end
 
 hold on; plot(qlon, qlat, 'm+', 'LineWidth',2,'MarkerSize',18);
 
-if Index_syn==1
-    load('sources_info.mat')
-    hold on;
-    for i=1:length(subsrct)
-        colorindex = round(((subsrct(i)+src_time_correct)/MaxTimeSrc)*(ncol-1)) + 1;
-        plot(subsrclon(i),subsrclat(i),'p', 'MarkerEdgeColor','k','MarkerFaceColor',cmap(colorindex,:), ...
-            'LineWidth', 0.5, 'MarkerSize', 25*srcamp(i) );
-    end
-end
-
-hold on;
-
 set(gca,'FontSize',15);
 
 
@@ -665,79 +637,6 @@ if indexSumAllFreq == 1
     save([FigFolder 'CVX_peakinfo_f' freqrangestr 'Hz.txt'],'-ascii','firstsrcinfo');
 end
 
-%% Plot the CVX results with the topography background
-%--------------------------------------------------------------------------------------------------------------------------------------
-if IndexTopoBackground==1
-    figure(101); hold off;
-    
-    firstsrcinfo = [];
-    secondsrcinfo = [];
-    kk1 = 0;
-    kk2 = 0;
-    
-    imagesc(maplon,maplat,mapTopo);
-    axis xy;
-    hold on
-    colormap(colormap_etopo);
-    %colormap(gray)
-    
-    for i = 1:size(borders)
-        hold on; plot(borders(i).X, borders(i).Y, 'k');
-    end
-    hold on; plot(platebdr(:,1), platebdr(:,2),'k-', 'LineWidth',2); % plot plate boundaries
-    hold on; plot(faultlon, faultlat, 'k--', 'LineWidth',1);
-    
-    
-    for i = 1:nsegwin
-        % plot largest peak (not on the boundaries)
-        isbdr = (cvxpeakinfo(i,3) == 1 || cvxpeakinfo(i,3) == nlonpt || cvxpeakinfo(i,4) == 1 ||  cvxpeakinfo(i,4) == nlatpt);
-        if cvxpeakinfo(i,3) > 0 && cvxpeakinfo(i,1) <= maxmidtime && cvxpeakinfo(i,5)/MaxAmpSrc > 0.0 && (~isbdr)
-            colorindex = round((cvxpeakinfo(i,2)/MaxTimeSrc)*(ncol-1)) + 1;
-            if colorindex <= 0
-                colorindex = 1;
-            elseif colorindex > ncol
-                colorindex = ncol;
-            end
-            hold on
-            %             plot(lonloc(cvxpeakinfo(i,3)), latloc(cvxpeakinfo(i,4)), 'o', 'MarkerEdgeColor', cmap(colorindex,:), ...
-            %                 'MarkerFaceColor', cmap(colorindex,:), 'MarkerSize', 16*cvxpeakinfo(i,5)/MaxAmpSrc );
-            plot(lonloc(cvxpeakinfo(i,3)), latloc(cvxpeakinfo(i,4)), 'o', 'MarkerEdgeColor','k','MarkerFaceColor', cmap(colorindex,:), ...
-                'LineWidth', 1, 'MarkerSize', 25*cvxpeakinfo(i,5)/MaxAmpSrc );
-            hold on;
-            kk1 = kk1 + 1;
-            firstsrcinfo(kk1, 1:4) = [lonloc(cvxpeakinfo(i,3)) latloc(cvxpeakinfo(i,4)) cvxpeakinfo(i,2) cvxpeakinfo(i,5)];
-        end
-        
-        
-    end
-    
-    hold on; plot(qlon, qlat, 'm+', 'LineWidth',2,'MarkerSize',18);
-    
-    hold on;
-    
-    
-    
-    colorbar;% colormap(cmap); caxis([0 MaxTimeSrc]);
-    xlim([lonloc(1) lonloc(end)]);
-    ylim([latloc(1) latloc(end)]);
-    daspect([1 cosd(qlat) 1]); set(gca,'YDir','normal'); grid on;
-    
-    if IndexSettingRange ==1
-        ylim(Yrange);
-        xlim(Xrange);
-    end
-    
-    if indexSumAllFreq==1
-        title(['CVX Peak Time: f = [' num2str(ffeff(IIsumfreq(1)),3) '  ' num2str(ffeff(IIsumfreq(end)),3) '] Hz']);
-    else
-        title(['CVX Peak Time: f = [' num2str(ftestnew,3) '] Hz']);
-    end
-    
-    
-    
-    %    save(srcmatfile, 'ftestnew', 'firstsrcinfo', 'secondsrcinfo'); % save peaks information to mat file
-    print('-dpdf', [filename '_topo.pdf']);
-end
 %% ----------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -772,20 +671,7 @@ for i = 1:nsegwin
     end
 end
 
-if Index_syn==1
-    load('sources_info.mat')
-    hold on;
-    for i=1:length(subsrct)
-        colorindex = round(((subsrct(i)+src_time_correct)/MaxTimeSrc)*(ncol-1)) + 1;
-        plot(subsrclon(i),subsrclat(i),'p', 'MarkerEdgeColor','k','MarkerFaceColor',cmap(colorindex,:), ...
-            'LineWidth', 1.5, 'MarkerSize', 25*srcamp(i) );
-    end
-end
-
 hold on; plot(qlon, qlat, 'm+', 'LineWidth',2,'MarkerSize',18);
-hold on;
-
-
 
 colorbar; colormap(cmap); caxis([0 MaxTimeSrc]);
 xlim([lonloc(1) lonloc(end)]);
@@ -811,69 +697,6 @@ elseif indexSumAllFreq == 1
 end
 print('-dpdf', [filename '.pdf']);
 
-%% Plot the beamforming results with topograpy background
-%--------------------------------------------------------------------------------------------------------------------------------
-if IndexTopoBackground == 1
-    figure(201); hold off;
-    
-    imagesc(maplon,maplat,mapTopo);
-    axis xy;
-    hold on
-    colormap(colormap_etopo);
-    %colormap(gray);
-    
-    
-    for i = 1:size(borders)
-        hold on; plot(borders(i).X, borders(i).Y, 'k');
-    end
-    hold on; plot(platebdr(:,1), platebdr(:,2),'k-', 'LineWidth',2); % plot plate boundaries
-    hold on; plot(faultlon, faultlat, 'k--', 'LineWidth',1);
-    
-    
-    for i = 1:nsegwin
-        isbdr = (beampeakinfo(i,3) == 1 || beampeakinfo(i,3) == nlonpt || beampeakinfo(i,4) == 1 ||  beampeakinfo(i,4) == nlatpt);
-        if beampeakinfo(i,3) > 0 && beampeakinfo(i,1) <= maxmidtime && (~isbdr)
-            colorindex = round((beampeakinfo(i,2)/MaxTimeSrc)*(ncol-1)) + 1;
-            if colorindex <= 0
-                colorindex = 1;
-            elseif colorindex > ncol
-                colorindex = ncol;
-            end
-            hold on;
-            %         plot(lonloc(beampeakinfo(i,3)), latloc(beampeakinfo(i,4)), 'o', 'MarkerEdgeColor', cmap(colorindex,:), ...
-            %             'MarkerFaceColor', cmap(colorindex,:), 'MarkerSize', 16*beampeakinfo(i,5)/MaxAmpSrc );
-            plot(lonloc(beampeakinfo(i,3)), latloc(beampeakinfo(i,4)), 'o', 'MarkerEdgeColor', 'k','MarkerFaceColor',cmap(colorindex,:), ...
-                'LineWidth', 1.5, 'MarkerSize', 25*beampeakinfo(i,5)/MaxAmpSrc );
-            hold on;
-        end
-    end
-    
-    hold on; plot(qlon, qlat, 'm+', 'LineWidth',2,'MarkerSize',18);
-    hold on;
-    
-    
-    
-    colorbar; %colormap(cmap); caxis([0 MaxTimeSrc]);
-    xlim([lonloc(1) lonloc(end)]);
-    ylim([latloc(1) latloc(end)]);
-    
-    if IndexSettingRange ==1
-        ylim(Yrange);
-        xlim(Xrange);
-    end
-    
-    daspect([1 cosd(qlat) 1]); set(gca,'YDir','normal'); grid on;
-    
-    if indexSumAllFreq==1
-        title(['Beamforming Peak Time: f = [' num2str(ffeff(IIsumfreq(1)),3) '  ' num2str(ffeff(IIsumfreq(end)),3) '] Hz']);
-    else
-        title(['Beamforming Peak Time: f = [' num2str(ftestnew,3) '] Hz']);
-    end
-    
-    
-    print('-dpdf', [filename '_topo.pdf']);
-    
-end
 %% ------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -901,376 +724,6 @@ print('-dpdf', filename);
 
 
 
-%% plot source imaging results of each time window and make the movie
-
-% if indexPlotwin == 1
-%     h = figure (88);
-%     cmap = colormap(pink);
-%     cmap = cmap(end:-1:1,:);
-%     PaperWidLength = round([1.0 0.6]*800);
-%     set(h,'Position',[100 100 PaperWidLength]);
-%
-%     mov(1:nsegwin) = struct('cdata', [],...
-%                             'colormap', []);
-%     axis tight
-%     set(gca,'nextplot','replacechildren');
-%     hold off;
-%
-%     for iw = 1:nsegwin
-%         wint1 = ptmin + (iw - 1)*dtsegwin;  % window starting time
-%         wint2 = ptmin + (iw - 1)*dtsegwin + segwint; % window ending time
-%         display([num2str(wint1) '--' num2str(wint2) ' s']);
-%
-%         if ntwinAverage >= 3
-%             beamfreq = squeeze(beamfreqAllNew(:,:,iw));
-%             srcAmpGrids = squeeze(srcAmpGridsAllNew(:,:,iw));
-%         elseif ntwinAverage == 1
-%             beamfreq = squeeze(beamfreqAll(:,:,iw));
-%             srcAmpGrids = squeeze(srcAmpGridsAll(:,:,iw));
-%         end
-%
-%         clf
-%         subplot(1,2,1);
-%         imagesc(lonloc,latloc,srcAmpGrids'), colorbar; colormap(cmap);
-%         caxis([0 max(max(srcAmpGrids))]);
-%     %     if indexSumAllFreq == 1
-%     %         caxis([0 max(cvxpeakinfo(:,5))]);
-%     %     end
-%         % hold on; plot(coast.long, coast.lat, 'w', 'LineWidth',1);
-%         for i = 1:size(borders) % plot border
-%             hold on; plot(borders(i).X, borders(i).Y, 'k');
-%         end
-%         hold on; plot(platebdr(:,1), platebdr(:,2),'b-', 'LineWidth',2); % plot plate boundaries
-%         hold on; plot(faultlon, faultlat, 'b--', 'LineWidth',1);
-%         hold on; plot(qlon, qlat, 'bp', 'MarkerSize',9);
-%         if cvxpeakinfo(iw,5) > 0
-%             hold on; plot(lonloc(cvxpeakinfo(iw,3)), latloc(cvxpeakinfo(iw,4)), 'm+', 'MarkerSize',9);
-%         end
-%         if cvx2ndpeakinfo(iw,5) > 0
-%             hold on; plot(lonloc(cvx2ndpeakinfo(iw,3)), latloc(cvx2ndpeakinfo(iw,4)), 'm+', 'MarkerSize',6);
-%         end
-%         xlim([lonloc(1) lonloc(end)]);
-%         ylim([latloc(1) latloc(end)]);
-%         daspect([1 cosd(qlat) 1]); set(gca,'YDir','normal'); grid on;
-%
-%         if indexSumAllFreq == 1
-%             title(['CVX: f = [' num2str(ffeff(IIsumfreq(1)),3) '  ' num2str(ffeff(IIsumfreq(end)),3) '] Hz']);
-%         else
-%             title(['CVX: f = ' num2str(ftestnew,3) ' Hz']);
-%         end
-%
-%         subplot(1,2,2);
-%         imagesc(lonloc,latloc,beamfreq'), colorbar; colormap(cmap);
-%         caxis([0 max(max(beamfreq))]);
-%     %     if indexSumAllFreq == 1
-%     %         caxis([0 max(beampeakinfo(:,5))]);
-%     %     end
-%         % hold on; plot(coast.long, coast.lat, 'w', 'LineWidth',1);
-%         for i = 1:size(borders)
-%             hold on; plot(borders(i).X, borders(i).Y, 'k');
-%         end
-%         hold on; plot(platebdr(:,1), platebdr(:,2),'b-', 'LineWidth',2); % plot plate boundaries
-%         hold on; plot(faultlon, faultlat, 'b--', 'LineWidth',1);
-%         hold on; plot(qlon, qlat, 'bp', 'MarkerSize',9);
-%         if cvxpeakinfo(iw,5) > 0
-%             hold on; plot(lonloc(cvxpeakinfo(iw,3)), latloc(cvxpeakinfo(iw,4)), 'm+', 'MarkerSize',7);
-%         end
-%         if beampeakinfo(iw,5) > 0
-%             hold on; plot(lonloc(beampeakinfo(iw,3)), latloc(beampeakinfo(iw,4)), 'yo', 'MarkerSize',7);
-%         end
-%
-%         xlim([lonloc(1) lonloc(end)]);
-%         ylim([latloc(1) latloc(end)]);
-%         daspect([1 cosd(qlat) 1]); set(gca,'YDir','normal'); grid on;
-%         title(['Beam: time = [' num2str(wint1) '  ' num2str(wint2) '] s']);
-%         if indexSumAllFreq == 0
-%             if indexSpatialSmooth ~= 1
-%                 print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win.pdf']);
-%             else
-%                 print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win_Rs' num2str(SmoothRadius) '.pdf']);
-%             end
-%         elseif indexSumAllFreq == 1
-%             if indexSpatialSmooth ~= 1
-%                 print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' freqrangestr 'Hz_Ave' num2str(ntwinAverage) 'win.pdf']);
-%             else
-%                 print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' freqrangestr 'Hz_Ave' num2str(ntwinAverage) 'win_Rs' num2str(SmoothRadius) '.pdf']);
-%             end
-%         end
-%         % waitforbuttonpress
-%         % pause(0.5)
-%        mov(iw) = getframe(h);
-%     end
-%
-%     close(88);
-%
-%     numFrames = nsegwin;
-%
-%     animated(1,1,1,numFrames) = 0;
-%     for k=1:numFrames
-%        if k == 1
-%           [animated, cmap] = rgb2ind(mov(k).cdata, 256);
-%        else
-%           animated(:,:,1,k) = ...
-%              rgb2ind(mov(k).cdata, cmap);
-%        end
-%     end
-%
-%     if indexSumAllFreq == 0
-%         if indexSpatialSmooth ~= 1
-%             filename = [FigFolder '/CVXBeam_Animated_' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win.gif'];
-%         else
-%             filename = [FigFolder '/CVXBeam_Animated_' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win_Rs' num2str(SmoothRadius) '.gif'];
-%         end
-%     elseif indexSumAllFreq == 1
-%         if indexSpatialSmooth ~= 1
-%             filename = [FigFolder '/CVXBeam_Animated_' freqrangestr 'Hz.gif'];
-%         else
-%             filename = [FigFolder '/CVXBeam_Animated_' freqrangestr 'Hz_Rs' num2str(SmoothRadius) '.gif'];
-%         end
-%     end
-%
-%
-%     imwrite(animated, cmap, filename, 'DelayTime', 0.5, ...
-%        'LoopCount', inf);
-% end
-
-if indexPlotwin == 1
-    h = figure (88);
-    cmap = colormap(bone);
-    cmap = cmap(end:-1:1,:);
-    cmap=colormap(jet);
-    PaperWidLength = round([1.0 0.6]*800);
-    set(h,'Position',[100 100 PaperWidLength]);
-    
-    mov(1:nsegwin) = struct('cdata', [],...
-        'colormap', []);
-    axis tight
-    set(gca,'nextplot','replacechildren');
-    hold off;
-    
-    if ntwinAverage >= 3
-        beamfreqMax = max(max(max(abs(beamfreqAllNew))));
-        srcAmpGridsMax = max(max(max(abs(srcAmpGridsAllNew))));
-    elseif ntwinAverage == 1
-        beamfreqMax = max(max(max(abs(beamfreqAll))));
-        srcAmpGridsMax = max(max(max(abs(srcAmpGridsAll))));
-    end
-    
-    
-    for iw = 1:nsegwin
-        wint1 = ptmin + (iw - 1)*dtsegwin;  % window starting time
-        wint2 = ptmin + (iw - 1)*dtsegwin + segwint; % window ending time
-        display([num2str(wint1) '--' num2str(wint2) ' s']);
-        
-        if ntwinAverage >= 3
-            beamfreq = squeeze(beamfreqAllNew(:,:,iw));
-            srcAmpGrids = squeeze(srcAmpGridsAllNew(:,:,iw));
-            
-            beamfreq1=beamfreq;%/beamfreqMax;
-            srcAmpGrids1=srcAmpGrids;%/srcAmpGridsMax;
-            
-            
-        elseif ntwinAverage == 1
-            beamfreq = squeeze(beamfreqAll(:,:,iw));
-            srcAmpGrids = squeeze(srcAmpGridsAll(:,:,iw));
-            
-            beamfreq1=beamfreq;%/beamfreqMax;
-            srcAmpGrids1=srcAmpGrids;%/srcAmpGridsMax;
-            
-        end
-        
-        
-        
-        clf
-        subplot(3,2,1:4);
-        imagesc(lonloc,latloc,srcAmpGrids1'), colorbar; colormap(cmap);
-        %caxis([0 max(max(srcAmpGrids1))]);
-        caxis([0 srcAmpGridsMax]);
-        %     if indexSumAllFreq == 1
-        %         caxis([0 max(cvxpeakinfo(:,5))]);
-        %     end
-        % hold on; plot(coast.long, coast.lat, 'w', 'LineWidth',1);
-        for i = 1:size(borders) % plot border
-            hold on; plot(borders(i).X, borders(i).Y, 'w');
-        end
-        hold on; plot(platebdr(:,1), platebdr(:,2),'w--', 'LineWidth',2); % plot plate boundaries
-        %hold on; plot(faultlon, faultlat, 'y--', 'LineWidth',0.5);
-        hold on; plot(qlon, qlat, 'yp', 'MarkerSize',12,'MarkerFaceColor','y');
-%         if cvxpeakinfo(iw,5) > 0
-%             hold on; plot(lonloc(cvxpeakinfo(iw,3)), latloc(cvxpeakinfo(iw,4)), 'm+', 'MarkerSize',9);
-%         end
-        %         if cvx2ndpeakinfo(iw,5) > 0
-        %             hold on; plot(lonloc(cvx2ndpeakinfo(iw,3)), latloc(cvx2ndpeakinfo(iw,4)), 'm+', 'MarkerSize',6);
-        %         end
-        if IndexSettingRange ==1
-            ylim(Yrange);
-            xlim(Xrange);
-        end
-        
-        text(-71.3,-30.3,['t=' num2str(cvxpeakinfo(iw,2),3)  ' s'],'Color','w','FontSize',15);
-        
-        daspect([1 cosd(qlat) 1]); set(gca,'YDir','normal'); grid on;
-        
-%         if indexSumAllFreq == 1
-%             title(['CVX: f = [' num2str(ffeff(IIsumfreq(1)),3) '-' num2str(ffeff(IIsumfreq(end)),3) '] Hz t=[' num2str(cvxpeakinfo(iw,2),4)  '] s']);
-%         else
-%             title(['CVX: f = ' num2str(ftestnew,3) ' Hz']);
-%         end
-        
-%         subplot(2,2,2);
-%         imagesc(lonloc,latloc,beamfreq1'), colorbar; colormap(cmap);
-%         %    caxis([0 max(max(beamfreq1))]);
-%         caxis([0 beamfreqMax]);
-%         %     if indexSumAllFreq == 1
-%         %         caxis([0 max(beampeakinfo(:,5))]);
-%         %     end
-%         % hold on; plot(coast.long, coast.lat, 'w', 'LineWidth',1);
-%         for i = 1:size(borders)
-%             hold on; plot(borders(i).X, borders(i).Y, 'k');
-%         end
-%         hold on; plot(platebdr(:,1), platebdr(:,2),'r-', 'LineWidth',4); % plot plate boundaries
-%         hold on; plot(faultlon, faultlat, 'y--', 'LineWidth',0.5);
-%         hold on; plot(qlon, qlat, 'yp', 'MarkerSize',9);
-%         if cvxpeakinfo(iw,5) > 0
-%             hold on; plot(lonloc(cvxpeakinfo(iw,3)), latloc(cvxpeakinfo(iw,4)), 'm+', 'MarkerSize',7);
-%         end
-%         if beampeakinfo(iw,5) > 0
-%             hold on; plot(lonloc(beampeakinfo(iw,3)), latloc(beampeakinfo(iw,4)), 'yo', 'MarkerSize',7);
-%         end
-%         
-%         if IndexSettingRange ==1
-%             ylim(Yrange);
-%             xlim(Xrange);
-%         end
-%         
-%         
-%         daspect([1 cosd(qlat) 1]); set(gca,'YDir','normal'); grid on;
-%         title(['Beam: time = [' num2str(beampeakinfo(iw,2),4) '] s']);
-        
-        
-        subplot(3,2,5:6)
-        imagesc(ptmin:dt:ptmax, 1:ntrGood, newdata2, climnewdata); colorbar;
-        hold on;
-        plot([80 80],[0.5 ntrGood-1],'-m','LineWidth',3);
-        
-        twinBegin=beampeakinfo(iw,1)-segwint/2;
-        twinEnd=beampeakinfo(iw,1)+segwint/2;
-        
-        
-        hold on
-        plot([twinBegin twinBegin],[1 ntrGood],'-','LineWidth',2);
-        hold on
-        plot([twinEnd twinEnd],[1 ntrGood],'-','LineWidth',2);
-        colormap(jet);
-        set(gca,'YDir','normal');
-        
-        if indexSumAllFreq == 0
-            if indexSpatialSmooth ~= 1
-                print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win.pdf']);
-            else
-                print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win_Rs' num2str(SmoothRadius) '.pdf']);
-            end
-        elseif indexSumAllFreq == 1
-            if indexSpatialSmooth ~= 1
-                print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' freqrangestr 'Hz_Ave' num2str(ntwinAverage) 'win.pdf']);
-            else
-                print('-dpdf', [CVXBeamFigfolder 'srcImage_t_' num2str(wint1) '-' num2str(wint2) 's_f' freqrangestr 'Hz_Ave' num2str(ntwinAverage) 'win_Rs' num2str(SmoothRadius) '.pdf']);
-            end
-        end
-        % waitforbuttonpress
-        % pause(0.5)
-        mov(iw) = getframe(h);
-    end
-    
-    close(88);
-    
-    numFrames = nsegwin;
-    
-    animated(1,1,1,numFrames) = 0;
-    for k=1:numFrames
-        if k == 1
-            [animated, cmap] = rgb2ind(mov(k).cdata, 256);
-        else
-            animated(:,:,1,k) = ...
-                rgb2ind(mov(k).cdata, cmap);
-        end
-    end
-    
-    if indexSumAllFreq == 0
-        if indexSpatialSmooth ~= 1
-            filename = [FigFolder 'CVXBeam_Animated_' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win.gif'];
-        else
-            filename = [FigFolder 'CVXBeam_Animated_' num2str(ftestnew,3) 'Hz_Ave' num2str(ntwinAverage) 'win_Rs' num2str(SmoothRadius) '.gif'];
-        end
-    elseif indexSumAllFreq == 1
-        if indexSpatialSmooth ~= 1
-            filename = [FigFolder 'CVXBeam_Animated_' freqrangestr 'Hz.gif'];
-        else
-            filename = [FigFolder 'CVXBeam_Animated_' freqrangestr 'Hz_Rs' num2str(SmoothRadius) '.gif'];
-        end
-    end
-    
-    
-    imwrite(animated, cmap, filename, 'DelayTime', 0.5, ...
-        'LoopCount', inf);
-    movie2avi(mov,'./power_movie.avi','quality',100,'fps',2)
-end
-
-
-%% plot snapshot
-if Index_Snapshot == 1
-    
-    h = figure (1088);
-    cmap2=colormap(jet);
-    PaperWidLength = round([1.0 0.6]*1500);
-    set(h,'Position',[100 100 PaperWidLength]);
-    NT=length(T_snapshot);
-    II_t=zeros(NT);
-    for IT=1:NT
-%        [tmp0,II_t(IT)] = min(abs(T_snapshot(IT)-cvxpeakinfo(:,2)));
-        [tmp0,II_t(IT)] = min(abs(T_snapshot(IT)-cvxpeakinfo(:,1)));
-    end
-    
-    for IT=1:NT
-        if ntwinAverage >= 3
-            
-            srcAmpGrids = squeeze(srcAmpGridsAllNew(:,:,II_t(IT)));
-            srcAmpGrids1=srcAmpGrids;%/srcAmpGridsMax;
-            
-            
-        elseif ntwinAverage == 1
-            srcAmpGrids = squeeze(srcAmpGridsAll(:,:,II_t(IT)));
-            srcAmpGrids1=srcAmpGrids;%/srcAmpGridsMax;           
-        end
-        
-        subplot(3,4,IT)
-        
-        imagesc(lonloc,latloc,srcAmpGrids1'); colormap(cmap2);
-        caxis([0 srcAmpGridsMax]);
-
-        for i = 1:size(borders) % plot border
-            hold on; plot(borders(i).X, borders(i).Y, 'w');
-        end
-        hold on; plot(platebdr(:,1), platebdr(:,2),'w--', 'LineWidth',2); % plot plate boundaries
-        %hold on; plot(faultlon, faultlat, 'y--', 'LineWidth',0.5);
-        hold on; plot(qlon, qlat, 'mp', 'MarkerSize',12,'MarkerFaceColor','m');
-        
-        if IndexSettingRange ==1
-            ylim(Yrange);
-            xlim(Xrange);
-        end
-        
-%        text(-71.8,-32.2,['t=' num2str(cvxpeakinfo(II_t(IT),2),3)  ' s'],'Color','w','FontSize',10);
-        text(-71.8,-32.2,['t=' num2str(cvxpeakinfo(II_t(IT),1))  ' s'],'Color','w','FontSize',10);
-        
-        daspect([1 cosd(qlat) 1]); set(gca,'YDir','normal','xtick',[],'ytick',[]); grid on;
-        
-    end
-                
-        
-
-print('-dpdf','snapshots.pdf')
-end
 
 
 %% get back to the PlotFile
