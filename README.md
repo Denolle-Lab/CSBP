@@ -1,7 +1,7 @@
 # CSBP
  Matlab code of the Compressive Sensing BackProjection for earthquake source imaging.
 
-**Compressive Sensing BackProjection (CSBP) is a high resolution backprojection method in frequency domain. It seeks for the sparse representation for the backprojection image using L1-norm inversion method. The details about the method can be found in the following papers:**
+**Compressive Sensing BackProjection (CSBP) is a high resolution backprojection method in frequency domain. It seeks for the sparse representation for the backprojection image using L1-norm inversion method. The details about the method can be found in the following papers, please cite them if you are using this code for your research.**
 
 *Yao, Huajian, et al. "Compressive sensing of the Tohoku‐Oki Mw 9.0 earthquake: Frequency‐dependent rupture modes." Geophysical Research Letters 38.20 (2011).*
 
