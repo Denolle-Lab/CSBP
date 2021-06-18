@@ -32,16 +32,6 @@ caxis([-1 1]);
 %event=time_cut(event,20,300);
 event.p_time=[-2 12];
 
-%%
-% % setting the original time and arrival time for each station
-% for LL=1:nsta
-%     event.sac(LL).O=synsrcTime(JJ);
-%     event.sac(LL).A=synsrcTime(JJ)+src2sta_time(LL,JJ);
-%     event.sac(LL).STLA=staLat(LL);
-%     event.sac(LL).STLO=staLon(LL);   
-% end
-% 
-% 
 
 figure(1);
 show_P_matrix(event);
