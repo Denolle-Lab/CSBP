@@ -19,7 +19,7 @@ This CSBP code is based on Matlab, and we use a CVX package to solve for the spa
 
 **Step 1: Prepare the input data. (Step1_Prepare_sacdata.m)**
 
-Here the input is the event SAC data, which includes waveforms 60s before and 300s after the P-arrival of the 2011 Tohoku earthquake. The data has gone through some basic preprocessing including removing instrumental response, de-mean and de-trend. I often directly download the event data from IRIS Wilber3 for convenience. But starting from the continuous raw data is easy to implement.
+Here the input is the event SAC data, which includes waveforms 60s before and 300s after the P-arrival of the 2011 Tohoku earthquake recorded by USArray (TA). The data has gone through some basic preprocessing including removing instrumental response, de-mean and de-trend. I often directly download the event data from IRIS Wilber3 for convenience. But starting from the continuous raw data is easy to implement.
 
 The preparation includes combining the array data, filtering, resampling, and realigning the data based on the P wave arrival. Finally the processed data is output to a working folder, where the CSBP will start. In this code, the output is a binary format defined by Huajian, but basically the processed data is a matrix of array waveform data and some information about the array. For now we don't have to worry about the format.
 
