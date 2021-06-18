@@ -10,7 +10,8 @@
 Yao et al. (2011) is about the basic CSBP method. Yin et al. (2018) presents an improved CSBP method applying grid-refinement to improve the efficicency and resolution of the method. In Yin et al. (2018), a waveform realignment technique is also proposed, but that work best for unilateral rupture. So for general use, this package only include the one with grid-refinement.
 
 
-==================================================================================================
+==============================================================================
+
 This CSBP code is based on Matlab, and we use a CVX package to solve for the sparsity inversion problem (CVX has both Matlab and Python version). In this package, I'm using the 2011 Tohoku earthquake as an example. Steps to run the Compressive Sensing Backprojection are shown below:
 
 **Step 0: Install the CVX package (Step0_install_cvx_package.m)**
